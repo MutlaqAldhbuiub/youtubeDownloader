@@ -1,6 +1,8 @@
 //window.onload = function(){
 
-
+function downloadVideo(){
+    console.log("Downloading ..");
+}
 
 var videoUrls = ytplayer.config.args.url_encoded_fmt_stream_map.split(",").map(function(item){
     return item.split("&").reduce(function(pre, cur){
@@ -21,6 +23,7 @@ btn.className = "yt-simple-endpoint style-scope ytd-button-renderer";
 btn.setAttribute("role","button");
 btn.innerText = "Download";
 container.appendChild(btn);
+btn.onclick(downloadVideo());
 
 
 
