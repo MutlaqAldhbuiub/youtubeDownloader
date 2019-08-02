@@ -20,7 +20,7 @@ var btn = document.createElement("button");
 btn.className = "yt-simple-endpoint style-scope ytd-button-renderer";
 btn.setAttribute("role","button");
 btn.innerText = "Download";
-container.appendChild(shareIcon + btn);
+container.appendChild(btn);
 
 
 
