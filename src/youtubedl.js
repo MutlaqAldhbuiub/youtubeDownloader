@@ -1,7 +1,12 @@
-//window.onload = function(){
+window.onload = function(){
 
 function downloadVideo(){
-    console.log("Downloading ..");
+    var dl = document.getElementById("videoDownloadDropDown");
+    if(dl.className.indexOf("shown") > -1){
+        dl.className = dl.className.replace("shown",""); // just replace shown with nothing!
+    }else{
+    dl.className += " shown";
+    }
 }
 
 var videoUrls = ytplayer.config.args.url_encoded_fmt_stream_map.split(",").map(function(item){
@@ -21,12 +26,30 @@ var container = document.getElementById("top-level-buttons");
 var btn = document.createElement("button");
 btn.className = "yt-simple-endpoint style-scope ytd-button-renderer";
 btn.setAttribute("role","button");
+btn.id = "downloadVideo";
 btn.innerText = "Download";
+
+
+var dropDown = document.createElement("div");
+dropDown.id = "videoDownloadDropDown";
+container.appendChild(dropDown);
+
 container.appendChild(btn);
-btn.onclick(downloadVideo());
+
+var dropList = document.createElement("ul");
+dropDown.appendChild(dropList);
+
+for(i in videoUrls){
+    var item = document.createElement("a");
+    item.innerText = videoUrls[i]["quality"];
+    item.setAttribute("href",videoUrls[i]["url"]);
+    dropList.appendChild(item);
+}
+
+btn.addEventListener("click",downloadVideo);
 
 
 
 
 
-//}
+}
