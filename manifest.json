@@ -1,0 +1,14 @@
+{
+    "name": "Just Video Downloader",
+    "description": "Download Video with Just one-click button!",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "web_accessible_resources" : ["src/youtubedl.js"],
+    "content_scripts":[
+      {
+        "matches":["https://www.youtube.com/watch*"],
+        "js":["src/loader.js"]
+      }
+    ]
+  }
+  
