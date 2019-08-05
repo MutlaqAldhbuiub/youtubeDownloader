@@ -10,6 +10,12 @@
         "js":["src/loader.js"],
         "css":["src/style.css"]
       }
-    ]
+    ],
+    "permissions": [
+      "downloads"
+    ],
+    "background":{
+      "scripts":["src/background.js"]
+    }
   }
   

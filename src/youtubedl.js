@@ -1,4 +1,4 @@
-window.onload = function(){
+//window.onload = function(){
 
 function downloadVideo(){
     var dl = document.getElementById("videoDownloadDropDown");
@@ -7,7 +7,31 @@ function downloadVideo(){
     }else{
     dl.className += " shown";
     }
+
+    var data = {"type":"download clicked"};
+    window.postMessage(data,"*");
+
+
+    //var ext_id = document.getElementById("vdyt").getAttribute("data-ext");
+    //console.log(ext_id);
 }
+
+
+
+    function downloadURI(event){
+        event.preventDefault();
+        event.stopPropagation();
+        
+        var url = event.currentTarget.getAttribute("href");
+        var name = document.getElementsByTagName("title")[0].innerText;
+        var dataType = event.currentTarget.getAttribute("data-type");
+        var data = {url: url,name: name,sender:"YTDL",type: dataType};
+    
+        window.postMessage(data,"*");
+
+        return false;
+    }
+
 
 var videoUrls = ytplayer.config.args.url_encoded_fmt_stream_map.split(",").map(function(item){
     return item.split("&").reduce(function(pre, cur){
@@ -24,7 +48,7 @@ var shareIcon = "<yt-icon-button id='button' class='style-scope ytd-button-rende
 var container = document.getElementById("top-level-buttons");
 
 var btn = document.createElement("button");
-btn.className = "yt-simple-endpoint style-scope ytd-button-renderer";
+btn.className = "downloadBtn";
 btn.setAttribute("role","button");
 btn.id = "downloadVideo";
 btn.innerText = "Download";
@@ -43,6 +67,10 @@ for(i in videoUrls){
     var item = document.createElement("a");
     item.innerText = videoUrls[i]["quality"];
     item.setAttribute("href",videoUrls[i]["url"]);
+    item.setAttribute("target","_blank");
+    item.setAttribute("data-type",videoUrls[i]["type"]);
+    item.addEventListener("click",downloadURI);
+    //item.addEventListener("click",downloadURI());
     dropList.appendChild(item);
 }
 
@@ -50,6 +78,4 @@ btn.addEventListener("click",downloadVideo);
 
 
 
-
-
-}
+//}
